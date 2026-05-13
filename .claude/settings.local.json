@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(node -e ' *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://www.wired.com/feed/rss\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://www.wired.com/category/artificial-intelligence/feed/rss\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://feeds.reuters.com/news/technology\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://www.reuters.com/tools/rss\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://news.google.com/rss/search?q=artificial+intelligence+when:1d&hl=en-US&gl=US&ceid=US:en\")",
+      "Bash(curl -s -I \"https://www.wired.com/feed/rss\")",
+      "Bash(curl -sL \"https://www.wired.com/feed/rss\")",
+      "Bash(curl -sL --max-time 10 \"https://news.google.com/rss/search?q=source:reuters.com+technology&hl=en-US&gl=US&ceid=US:en\")",
+      "Bash(npm run *)",
+      "Bash(lsof -ti:3001)",
+      "Bash(lsof -ti:5173)",
+      "Bash(cat /tmp/mikol-dev.log | grep -E \"error|Error|warn|WARN|transform\" | head -20)"
+    ]
+  }
+}
