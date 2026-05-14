@@ -15,7 +15,26 @@
       "Bash(npm run *)",
       "Bash(lsof -ti:3001)",
       "Bash(lsof -ti:5173)",
-      "Bash(cat /tmp/mikol-dev.log | grep -E \"error|Error|warn|WARN|transform\" | head -20)"
+      "Bash(cat /tmp/mikol-dev.log | grep -E \"error|Error|warn|WARN|transform\" | head -20)",
+      "WebFetch(domain:efts.sec.gov)",
+      "Bash(curl -s -H \"User-Agent: Mozilla/5.0 \\(compatible; ResearchBot/1.0; +http://example.com\\)\" \"https://data.sec.gov/submissions/CIK0002063740.json\")",
+      "Bash(curl -s \"https://www.sec.gov/Archives/edgar/data/2063740/000206374025000001/xslFormDX01/primary_doc.xml\")",
+      "Bash(curl -s \"https://www.sec.gov/Archives/edgar/data/2063740/000206374025000001/0002063740-25-000001-index.json\")",
+      "Bash(curl -s \"https://data.sec.gov/submissions/CIK0002096208.json\")",
+      "Bash(python3 -m json.tool)",
+      "Bash(curl -s -H \"User-Agent: Mozilla/5.0 \\(compatible; ResearchBot/1.0\\)\" \"https://data.sec.gov/submissions/CIK0002096208.json\")",
+      "Bash(node scripts/test-deals.js)",
+      "Bash(echo \"PID $!\")",
+      "Read(//private/tmp/**)",
+      "Bash(xargs kill -9)",
+      "Bash(pkill -f \"mikol-dev\")",
+      "Bash(kill %1)",
+      "Bash(open http://localhost:5173/deals)",
+      "Bash(screencapture -x /tmp/deals-tab.png)",
+      "Bash(screencapture /tmp/deals-tab.png)",
+      "Bash(open -a \"Google Chrome\" http://localhost:5173/deals)",
+      "Bash(open -a \"Safari\" http://localhost:5173/deals)",
+      "Bash(screencapture /tmp/deals-ui.png)"
     ]
   }
 }

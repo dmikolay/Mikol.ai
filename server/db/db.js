@@ -30,6 +30,9 @@ function initDb() {
     db.prepare('ALTER TABLE items ADD COLUMN saved INTEGER DEFAULT 0').run()
   }
 
+  // Idempotent index migrations
+  db.exec('CREATE UNIQUE INDEX IF NOT EXISTS idx_deals_dedup ON deals (company_name, announced_at, source)')
+
   console.log(`[db] initialized → ${DB_PATH}`)
   return db
 }

@@ -76,6 +76,7 @@ CREATE TABLE IF NOT EXISTS deals (
 
 CREATE INDEX IF NOT EXISTS idx_deals_announced ON deals (announced_at DESC);
 CREATE INDEX IF NOT EXISTS idx_deals_stage     ON deals (stage);
+CREATE UNIQUE INDEX IF NOT EXISTS idx_deals_dedup ON deals (company_name, announced_at, source);
 
 -- Thesis system
 CREATE TABLE IF NOT EXISTS theses (

@@ -4,6 +4,7 @@ const cron   = require('node-cron')
 function startScheduler() {
   // Lazy-require scrapers/AI here to avoid load-order issues at startup.
   const { ingestAll }     = require('../scrapers/rss')
+  const { ingestDeals }   = require('../scrapers/deals')
   const { runSummaryJob } = require('../ai/summarize')
 
   // RSS ingest every 3 hours (at :00 on hour 0, 3, 6, 9, 12, 15, 18, 21)
@@ -11,6 +12,13 @@ function startScheduler() {
     console.log('[cron] RSS ingest start')
     try { await ingestAll() }
     catch (e) { console.error('[cron] RSS error:', e.message) }
+  })
+
+  // Deal flow RSS ingest every 3 hours (offset by 30m from news ingest)
+  cron.schedule('30 */3 * * *', async () => {
+    console.log('[cron] deal RSS ingest start')
+    try { await ingestDeals() }
+    catch (e) { console.error('[cron] deals error:', e.message) }
   })
 
   // Summarization batch every 15 minutes
@@ -31,13 +39,18 @@ function startScheduler() {
     } catch (e) { console.error('[cron] age-out error:', e.message) }
   })
 
-  // Phase 2+: SEC EDGAR Form D scraper every 6h
-  // cron.schedule('0 */6 * * *', async () => { /* require('../scrapers/sec').ingestEdgar() */ })
+  // SEC EDGAR Form D scraper every 6h
+  cron.schedule('0 */6 * * *', async () => {
+    console.log('[cron] EDGAR Form D ingest start')
+    const { ingestEdgar } = require('../scrapers/sec')
+    try { await ingestEdgar() }
+    catch (e) { console.error('[cron] EDGAR error:', e.message) }
+  })
 
   // Phase 3+: xAI + GitHub person watchlist monitoring daily at 7am
   // cron.schedule('0 7 * * *', async () => { /* people monitoring */ })
 
-  console.log('[scheduler] started (RSS every 3h | summarize every 15m | age-out every 1h)')
+  console.log('[scheduler] started (RSS every 3h | deals every 3h+30m | summarize every 15m | age-out every 1h | EDGAR every 6h)')
 }
 
 module.exports = { startScheduler }
